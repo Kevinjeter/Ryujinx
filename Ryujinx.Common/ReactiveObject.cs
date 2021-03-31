@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Ryujinx.Common.Logging;
 
 namespace Ryujinx.Common
 {
@@ -8,6 +9,11 @@ namespace Ryujinx.Common
         private ReaderWriterLock _readerWriterLock = new ReaderWriterLock();
         private bool _isInitialized = false;
         private T _value;
+
+        private string _name { get; set; }
+        public string Name { get { return _name; } set { _name = value; } }
+        private string _category { get; set; }
+        public string Category { get { return _category; } set { _category = value; } }
 
         public event EventHandler<ReactiveEventArgs<T>> Event;
 
@@ -36,6 +42,13 @@ namespace Ryujinx.Common
 
                 if (!oldIsInitialized || !oldValue.Equals(_value))
                 {
+                    if (!string.IsNullOrEmpty(Name))
+                    { 
+                        //When values are changed, logged to console. If value does not have a Name, no log is printed
+                        //Some reactive object names are left commented out here, since they don't need to be exposed to the end user but the option is there for devs
+                        Logger.Info?.Print(LogClass.Application, $"{Category}: {Name} set to: {_value}");
+                    }
+
                     Event?.Invoke(this, new ReactiveEventArgs<T>(oldValue, value));
                 }
             }

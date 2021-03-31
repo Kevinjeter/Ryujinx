@@ -163,7 +163,7 @@ namespace Ryujinx.Configuration
                 EnableGuest        = new ReactiveObject<bool>();
                 EnableFsAccessLog  = new ReactiveObject<bool>();
                 FilteredClasses    = new ReactiveObject<LogClass[]>();
-                EnableFileLog      = new ReactiveObject<bool>();
+                EnableFileLog      = new ReactiveObject<bool>() { Name = "File Log", Category = "Logger" };
                 GraphicsDebugLevel = new ReactiveObject<GraphicsDebugLevel>();
             }
         }
@@ -229,12 +229,12 @@ namespace Ryujinx.Configuration
                 Region                  = new ReactiveObject<Region>();
                 TimeZone                = new ReactiveObject<string>();
                 SystemTimeOffset        = new ReactiveObject<long>();
-                EnableDockedMode        = new ReactiveObject<bool>();
-                EnablePtc               = new ReactiveObject<bool>();
-                EnableFsIntegrityChecks = new ReactiveObject<bool>();
-                FsGlobalAccessLogMode   = new ReactiveObject<int>();
-                AudioBackend            = new ReactiveObject<AudioBackend>();
-                IgnoreMissingServices   = new ReactiveObject<bool>();
+                EnableDockedMode        = new ReactiveObject<bool>() { Name = "Docked", Category = "System" };
+                EnablePtc               = new ReactiveObject<bool>() { Name = "PPTC", Category = "System" };
+                EnableFsIntegrityChecks = new ReactiveObject<bool>() { Name = "Enable File Integrity Checks", Category = "System" };
+                FsGlobalAccessLogMode   = new ReactiveObject<int>() { Name = "File Global Access Log", Category = "System" };
+                AudioBackend            = new ReactiveObject<AudioBackend>() { Name = "Audio Backend", Category = "System" };
+                IgnoreMissingServices   = new ReactiveObject<bool>() { Name = "Ignore Missing Services", Category = "System" };
             }
         }
 
@@ -310,13 +310,13 @@ namespace Ryujinx.Configuration
 
             public GraphicsSection()
             {
-                ResScale          = new ReactiveObject<int>();
-                ResScaleCustom    = new ReactiveObject<float>();
-                MaxAnisotropy     = new ReactiveObject<float>();
-                AspectRatio       = new ReactiveObject<AspectRatio>();
+                ResScale          = new ReactiveObject<int>() { Name = "Res Scale", Category = "Graphics" };
+                ResScaleCustom    = new ReactiveObject<float>() { Name = "Custom Scale", Category = "Graphics" };
+                MaxAnisotropy     = new ReactiveObject<float>() { Name = "Anisotrophy", Category = "Graphics" };
+                AspectRatio       = new ReactiveObject<AspectRatio>() { Name = "Aspect Ratio", Category = "Graphics" };
                 ShadersDumpPath   = new ReactiveObject<string>();
-                EnableVsync       = new ReactiveObject<bool>();
-                EnableShaderCache = new ReactiveObject<bool>();
+                EnableVsync       = new ReactiveObject<bool>() { Name = "VSync" , Category = "Graphics"};
+                EnableShaderCache = new ReactiveObject<bool>() { Name = "Shader Cache", Category = "Graphics" };
             }
         }
 
